@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_04_093016) do
+ActiveRecord::Schema.define(version: 2021_08_04_111901) do
 
   create_table "articles", force: :cascade do |t|
     t.string "title"
@@ -30,6 +30,11 @@ ActiveRecord::Schema.define(version: 2021_08_04_093016) do
     t.index ["article_id"], name: "index_comments_on_article_id"
   end
 
+  create_table "customers_products", id: false, force: :cascade do |t|
+    t.integer "customer_id", null: false
+    t.integer "product_id", null: false
+  end
+
   create_table "product_tests", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -38,6 +43,12 @@ ActiveRecord::Schema.define(version: 2021_08_04_093016) do
   create_table "products", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "user_id", null: false
+    t.decimal "price", precision: 5, scale: 2
+    t.string "supplier_type", null: false
+    t.integer "supplier_id", null: false
+    t.index ["supplier_type", "supplier_id"], name: "index_products_on_supplier"
+    t.index ["user_id"], name: "index_products_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -48,4 +59,5 @@ ActiveRecord::Schema.define(version: 2021_08_04_093016) do
   end
 
   add_foreign_key "comments", "articles"
+  add_foreign_key "products", "users"
 end
