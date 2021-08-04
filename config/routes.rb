@@ -5,6 +5,9 @@ Rails.application.routes.draw do
   get "/articles", to: "articles#index"
   get "/articles/:id", to: "articles#show"
 
+  get "/users", to: "users#index"
+  get "/users", to: "users#create"
+
   #The route above declares that GET /articles requests are mapped to the index action of ArticlesController.
   #To create ArticlesController and its index action, we'll run the controller generator (with the --skip-routes option because we already have an appropriate route):
   #$ bin/rails generate controller Articles index --skip-routes
