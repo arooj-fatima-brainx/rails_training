@@ -10,7 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_04_111901) do
+ActiveRecord::Schema.define(version: 2021_08_05_085244) do
+
+  create_table "accounts", force: :cascade do |t|
+    t.string "subdomain"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
   create_table "articles", force: :cascade do |t|
     t.string "title"
@@ -18,6 +24,12 @@ ActiveRecord::Schema.define(version: 2021_08_04_111901) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "status"
+  end
+
+  create_table "coffees", force: :cascade do |t|
+    t.string "size"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "comments", force: :cascade do |t|
@@ -35,6 +47,22 @@ ActiveRecord::Schema.define(version: 2021_08_04_111901) do
     t.integer "product_id", null: false
   end
 
+  create_table "people", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.string "terms_of_service"
+    t.string "eula"
+    t.string "email"
+  end
+
+  create_table "players", force: :cascade do |t|
+    t.integer "points"
+    t.text "games_played"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "product_tests", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -47,6 +75,7 @@ ActiveRecord::Schema.define(version: 2021_08_04_111901) do
     t.decimal "price", precision: 5, scale: 2
     t.string "supplier_type", null: false
     t.integer "supplier_id", null: false
+    t.string "legacy_code"
     t.index ["supplier_type", "supplier_id"], name: "index_products_on_supplier"
     t.index ["user_id"], name: "index_products_on_user_id"
   end
