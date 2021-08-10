@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_10_103623) do
+ActiveRecord::Schema.define(version: 2021_08_10_115614) do
 
   create_table "accounts", force: :cascade do |t|
     t.string "subdomain"
@@ -55,6 +55,14 @@ ActiveRecord::Schema.define(version: 2021_08_10_103623) do
     t.string "supplier_type"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "part_number"
+    t.integer "user_id"
+    t.index ["user_id"], name: "index_my_products_on_user_id"
+  end
+
+  create_table "my_products_users", id: false, force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "my_product_id", null: false
   end
 
   create_table "people", force: :cascade do |t|
@@ -86,4 +94,5 @@ ActiveRecord::Schema.define(version: 2021_08_10_103623) do
   end
 
   add_foreign_key "comments", "articles"
+  add_foreign_key "my_products", "users"
 end
