@@ -1,4 +1,4 @@
-
+<!--<h1>Hello, Rails!</h1>-->
 <h1>Articles</h1>
 
 Our blog has <%= Article.public_count %> articles and counting!
@@ -7,24 +7,36 @@ Our blog has <%= Article.public_count %> articles and counting!
   <% @articles.each do |article| %>
     <% unless article.archived? %>
     <li>
-      <%= article.title %>
-    </li>
-    <li>
       <%= article.id %>
     </li>
+<!--    <li>-->
+      <%#= article.title %>
+<!--    </li>-->
     <li>
       <a href="/articles/<%= article.id %>">
         <%= article.title %>
       </a>
     </li>
+      <li>
+        <%= article.body %>
+      </li>
+      <li>
+        <%= article.status %>
+      </li>
     <li>
       <a href="<%= article_path(article) %>">
         <%= article.title %>
       </a>
     </li>
-    <li>
+        <li>
     <%= link_to article.title, article %>
-  </li>
+      </li>
+    <li>
+      <hr>
+    </li>
+
+
+
   <% end %>
   <% end %>
 </ul>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_05_085244) do
+ActiveRecord::Schema.define(version: 2021_08_10_103623) do
 
   create_table "accounts", force: :cascade do |t|
     t.string "subdomain"
@@ -47,6 +47,16 @@ ActiveRecord::Schema.define(version: 2021_08_05_085244) do
     t.integer "product_id", null: false
   end
 
+  create_table "my_products", force: :cascade do |t|
+    t.integer "product_id"
+    t.string "name"
+    t.integer "price"
+    t.string "legacy_code"
+    t.string "supplier_type"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "people", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
@@ -68,18 +78,6 @@ ActiveRecord::Schema.define(version: 2021_08_05_085244) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "products", force: :cascade do |t|
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.integer "user_id", null: false
-    t.decimal "price", precision: 5, scale: 2
-    t.string "supplier_type", null: false
-    t.integer "supplier_id", null: false
-    t.string "legacy_code"
-    t.index ["supplier_type", "supplier_id"], name: "index_products_on_supplier"
-    t.index ["user_id"], name: "index_products_on_user_id"
-  end
-
   create_table "users", force: :cascade do |t|
     t.string "name"
     t.text "occupation"
@@ -88,5 +86,4 @@ ActiveRecord::Schema.define(version: 2021_08_05_085244) do
   end
 
   add_foreign_key "comments", "articles"
-  add_foreign_key "products", "users"
 end
