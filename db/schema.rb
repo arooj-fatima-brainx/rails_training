@@ -10,12 +10,30 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_11_080019) do
+ActiveRecord::Schema.define(version: 2021_08_11_103550) do
 
-  create_table "accounts", force: :cascade do |t|
-    t.string "subdomain"
+  create_table "account_histories", force: :cascade do |t|
+    t.integer "account_id"
+    t.integer "credit_rating"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["account_id"], name: "index_account_histories_on_account_id"
+  end
+
+  create_table "accounts", force: :cascade do |t|
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.string "account_number"
+  end
+
+  create_table "appointments", force: :cascade do |t|
+    t.integer "physician_id"
+    t.integer "patient_id"
+    t.datetime "appointment_date"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["patient_id"], name: "index_appointments_on_patient_id"
+    t.index ["physician_id"], name: "index_appointments_on_physician_id"
   end
 
   create_table "articles", force: :cascade do |t|
@@ -24,6 +42,33 @@ ActiveRecord::Schema.define(version: 2021_08_11_080019) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "status"
+  end
+
+  create_table "assemblies", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "assemblies_parts", id: false, force: :cascade do |t|
+    t.integer "assembly_id"
+    t.integer "part_id"
+    t.index ["assembly_id"], name: "index_assemblies_parts_on_assembly_id"
+    t.index ["part_id"], name: "index_assemblies_parts_on_part_id"
+  end
+
+  create_table "authors", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "books", force: :cascade do |t|
+    t.datetime "published_at"
+    t.integer "author_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["author_id"], name: "index_books_on_author_id"
   end
 
   create_table "coffees", force: :cascade do |t|
@@ -52,6 +97,19 @@ ActiveRecord::Schema.define(version: 2021_08_11_080019) do
     t.string "abc"
   end
 
+  create_table "documents", force: :cascade do |t|
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "employees", force: :cascade do |t|
+    t.string "name"
+    t.integer "manager_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["manager_id"], name: "index_employees_on_manager_id"
+  end
+
   create_table "my_products", force: :cascade do |t|
     t.integer "product_id"
     t.string "name"
@@ -70,6 +128,23 @@ ActiveRecord::Schema.define(version: 2021_08_11_080019) do
     t.integer "my_product_id", null: false
   end
 
+  create_table "paragraphs", force: :cascade do |t|
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "parts", force: :cascade do |t|
+    t.string "part_number"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "patients", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "people", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
@@ -77,6 +152,21 @@ ActiveRecord::Schema.define(version: 2021_08_11_080019) do
     t.string "terms_of_service"
     t.string "eula"
     t.string "email"
+  end
+
+  create_table "physicians", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "pictures", force: :cascade do |t|
+    t.string "name"
+    t.string "imageable_type"
+    t.integer "imageable_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["imageable_type", "imageable_id"], name: "index_pictures_on_imageable"
   end
 
   create_table "players", force: :cascade do |t|
@@ -91,6 +181,17 @@ ActiveRecord::Schema.define(version: 2021_08_11_080019) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "sections", force: :cascade do |t|
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "suppliers", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "name"
     t.text "occupation"
@@ -98,6 +199,8 @@ ActiveRecord::Schema.define(version: 2021_08_11_080019) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  add_foreign_key "books", "authors"
   add_foreign_key "comments", "articles"
+  add_foreign_key "employees", "employees", column: "manager_id"
   add_foreign_key "my_products", "users"
 end
