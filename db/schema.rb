@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_12_111057) do
+ActiveRecord::Schema.define(version: 2021_08_12_145605) do
 
   create_table "account_histories", force: :cascade do |t|
     t.integer "account_id"
@@ -58,9 +58,11 @@ ActiveRecord::Schema.define(version: 2021_08_12_111057) do
   end
 
   create_table "authors", force: :cascade do |t|
-    t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "title"
+    t.string "first_name"
+    t.string "last_name"
   end
 
   create_table "books", force: :cascade do |t|
@@ -68,7 +70,22 @@ ActiveRecord::Schema.define(version: 2021_08_12_111057) do
     t.integer "author_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "title"
+    t.integer "year_published"
+    t.string "isbn"
+    t.decimal "price"
+    t.boolean "out_of_print"
+    t.integer "views"
+    t.integer "supplier_id"
     t.index ["author_id"], name: "index_books_on_author_id"
+    t.index ["supplier_id"], name: "index_books_on_supplier_id"
+  end
+
+  create_table "books_orders", id: false, force: :cascade do |t|
+    t.integer "order_id"
+    t.integer "book_id"
+    t.index ["book_id"], name: "index_books_orders_on_book_id"
+    t.index ["order_id"], name: "index_books_orders_on_order_id"
   end
 
   create_table "chapters", force: :cascade do |t|
@@ -93,6 +110,17 @@ ActiveRecord::Schema.define(version: 2021_08_12_111057) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "status"
     t.index ["article_id"], name: "index_comments_on_article_id"
+  end
+
+  create_table "customers", force: :cascade do |t|
+    t.string "first_name"
+    t.string "last_name"
+    t.string "title"
+    t.string "email"
+    t.integer "visits"
+    t.integer "orders_count"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "customers_products", id: false, force: :cascade do |t|
@@ -134,6 +162,19 @@ ActiveRecord::Schema.define(version: 2021_08_12_111057) do
   create_table "my_products_users", id: false, force: :cascade do |t|
     t.integer "user_id", null: false
     t.integer "my_product_id", null: false
+  end
+
+  create_table "orders", force: :cascade do |t|
+    t.time "date_submitted"
+    t.integer "status"
+    t.decimal "subtotal"
+    t.decimal "shipping"
+    t.decimal "tax"
+    t.decimal "total"
+    t.integer "customer_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["customer_id"], name: "index_orders_on_customer_id"
   end
 
   create_table "paragraphs", force: :cascade do |t|
@@ -187,6 +228,19 @@ ActiveRecord::Schema.define(version: 2021_08_12_111057) do
   create_table "product_tests", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "reviews", force: :cascade do |t|
+    t.string "title"
+    t.text "body"
+    t.integer "rating"
+    t.integer "state"
+    t.integer "book_id"
+    t.integer "customer_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["book_id"], name: "index_reviews_on_book_id"
+    t.index ["customer_id"], name: "index_reviews_on_customer_id"
   end
 
   create_table "sections", force: :cascade do |t|
