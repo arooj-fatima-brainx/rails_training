@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_11_103550) do
+ActiveRecord::Schema.define(version: 2021_08_12_111057) do
 
   create_table "account_histories", force: :cascade do |t|
     t.integer "account_id"
@@ -69,6 +69,14 @@ ActiveRecord::Schema.define(version: 2021_08_11_103550) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["author_id"], name: "index_books_on_author_id"
+  end
+
+  create_table "chapters", force: :cascade do |t|
+    t.string "name"
+    t.integer "books_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["books_id"], name: "index_chapters_on_books_id"
   end
 
   create_table "coffees", force: :cascade do |t|
@@ -195,6 +203,14 @@ ActiveRecord::Schema.define(version: 2021_08_11_103550) do
   create_table "users", force: :cascade do |t|
     t.string "name"
     t.text "occupation"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "vehicles", force: :cascade do |t|
+    t.string "type"
+    t.string "color"
+    t.decimal "price", precision: 10, scale: 2
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
