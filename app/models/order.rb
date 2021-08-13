@@ -4,5 +4,9 @@ class Order < ApplicationRecord
 
   enum status: [:shipped, :being_packed, :complete, :cancelled]
 
-  scope :created_before, ->(time) { where('created_at < ?', time) }
+  # scope :created_before, ->(time) { where('created_at < ?', time) }  orrr
+
+  def self.created_before(time)
+    where("created_at < ?", time) if time.present?
+  end
 end
