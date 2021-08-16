@@ -30,7 +30,7 @@ class Person < ApplicationRecord
   # validates :terms_of_service, acceptance: { message: 'must be abided' }
   # validates :terms_of_service, acceptance: { accept: 'yes' }
   # validates :eula, acceptance: { accept: ['TRUE', 'accepted']
-  # validates :email, confirmation: true
+  validates :email, confirmation: true
   # validates :email_confirmation, presence: true
   # validates :email, confirmation: { case_sensitive: false }
   # validates :name, presence: true, length: { minimum: 2 } #or { maximum: 500 } or { in: 6..20 } or { is: 6 }--> must equal to 6
@@ -44,9 +44,9 @@ class Person < ApplicationRecord
   #   GoodnessValidator.new(person).validate
   # end
 
-  validates_each :name do |record, attr, value|
-    record.errors.add(attr, 'must start with upper case') if value =~ /\A[[:lower:]]/
-  end
+  # validates_each :name do |record, attr, value|
+  #   record.errors.add(attr, 'must start with upper case') if value =~ /\A[[:lower:]]/
+  # end
 
 
 

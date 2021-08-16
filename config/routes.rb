@@ -1,11 +1,12 @@
 Rails.application.routes.draw do
 
+  resources :news
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 
 
 
-  root "articles#index"
-
+  # root "news#index"
+  root "products#index"
   # get "/articles", to: "articles#index"
   # get "/articles/new", to: "articles#new"
   # post "/articles", to : "articles#create"
@@ -42,4 +43,5 @@ Rails.application.routes.draw do
 
   resources :products
   resources :users
+  resources :people
 end

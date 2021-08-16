@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_16_080742) do
+ActiveRecord::Schema.define(version: 2021_08_16_100231) do
 
   create_table "account_histories", force: :cascade do |t|
     t.integer "account_id"
@@ -148,6 +148,12 @@ ActiveRecord::Schema.define(version: 2021_08_16_080742) do
     t.index ["manager_id"], name: "index_employees_on_manager_id"
   end
 
+  create_table "holidays", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "libraries", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
@@ -178,6 +184,11 @@ ActiveRecord::Schema.define(version: 2021_08_16_080742) do
   create_table "my_products_users", id: false, force: :cascade do |t|
     t.integer "user_id", null: false
     t.integer "my_product_id", null: false
+  end
+
+  create_table "news", force: :cascade do |t|
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "orders", force: :cascade do |t|

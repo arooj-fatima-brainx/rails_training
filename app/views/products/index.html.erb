@@ -1,0 +1,31 @@
+<%#= render "shared/ad_banner" %>
+
+<h1>Products</h1>
+
+<p>Here are a few of our fine products:</p>
+<% @product.each do |product| %>
+  <p><%= product.name %></p>
+<!--  <%#= render partial: "product", locals: { product: @product } %>   oorr-->
+  <%#= render "product", product: @product %>
+
+<% end %>
+
+<%#= render "shared/footer" %>
+
+<!--instead of:-->
+<%#= render partial: "product", locals: { product: @item } %>
+<!--we would do:-->
+<%#= render partial: "product", object: @item %>
+
+<%#= render partial: "product", object: @item, as: "item" %>
+<!--This is equivalent to-->
+<%#= render partial: "product", locals: { item: @item } %>
+
+<%# @products.each do |product| %>
+  <%#= render partial: "product", locals: { product: product } %>
+<%# end %>
+<!--can be rewritten in a single line:-->
+<%#= render partial: "product", collection: @products %>
+<!--or-->
+<%#= render @products %>
+
