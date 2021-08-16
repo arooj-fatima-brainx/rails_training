@@ -1,7 +1,7 @@
 class Book < ApplicationRecord
   belongs_to :author
   has_many :chapters, dependent: :destroy
-
+  belongs_to :library
 
   # belongs_to :writer, class_name: 'Author', foreign_key: 'author_id'
 
