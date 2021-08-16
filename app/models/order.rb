@@ -9,4 +9,7 @@ class Order < ApplicationRecord
   def self.created_before(time)
     where("created_at < ?", time) if time.present?
   end
+
+  has_many :line_items, dependent: :destroy
+  # has_many :line_items, inverse_of: :order
 end

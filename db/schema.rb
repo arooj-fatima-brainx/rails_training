@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_12_145605) do
+ActiveRecord::Schema.define(version: 2021_08_16_080742) do
 
   create_table "account_histories", force: :cascade do |t|
     t.integer "account_id"
@@ -77,7 +77,9 @@ ActiveRecord::Schema.define(version: 2021_08_12_145605) do
     t.boolean "out_of_print"
     t.integer "views"
     t.integer "supplier_id"
+    t.integer "library_id"
     t.index ["author_id"], name: "index_books_on_author_id"
+    t.index ["library_id"], name: "index_books_on_library_id"
     t.index ["supplier_id"], name: "index_books_on_supplier_id"
   end
 
@@ -144,6 +146,20 @@ ActiveRecord::Schema.define(version: 2021_08_12_145605) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["manager_id"], name: "index_employees_on_manager_id"
+  end
+
+  create_table "libraries", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "line_items", force: :cascade do |t|
+    t.string "name"
+    t.integer "order_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["order_id"], name: "index_line_items_on_order_id"
   end
 
   create_table "my_products", force: :cascade do |t|
