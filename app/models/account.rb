@@ -4,5 +4,4 @@ class Account < ApplicationRecord
 
     belongs_to :supplier ,index: { unique: true }, foreign_key: true
     has_one :account_history , dependent: :destroy
-    # validates :email, uniqueness: true
 end
