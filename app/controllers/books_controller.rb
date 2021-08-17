@@ -12,7 +12,35 @@ class BooksController < ApplicationController
     end
   end
 
+  # def show
+  #   @book = Book.find_by(id: params[:id])
+  #   if @book.nil?
+  #     render action: "index"
+  #   end
+  # end
 
+  # def show
+  #   @book = Book.find_by(id: params[:id])
+  #   if @book.nil?
+  #     render action: "index"
+  #   end
+  # end
+
+  def show
+    @book = Book.find_by(id: params[:id])
+    if @book.nil?
+      @books = Book.all
+      flash.now[:alert] = "Your book was not found"
+      render "index"
+    end
+  end
+  # def show
+  #   @book = Book.find(params[:id])
+  #   if @book.out_of_print?
+  #     render action: "special_show" and return
+  #   end
+  #   render action: "regular_show"
+  # end
 
   private
   def book_params
