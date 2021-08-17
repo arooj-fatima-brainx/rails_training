@@ -6,7 +6,7 @@ Rails.application.routes.draw do
 
 
   # root "news#index"
-  root "products#index"
+  root "books#index"
   # get "/articles", to: "articles#index"
   # get "/articles/new", to: "articles#new"
   # post "/articles", to : "articles#create"
@@ -44,4 +44,5 @@ Rails.application.routes.draw do
   resources :products
   resources :users
   resources :people
+  resources :books
 end
