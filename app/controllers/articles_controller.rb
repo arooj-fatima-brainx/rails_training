@@ -1,5 +1,5 @@
 class ArticlesController < ApplicationController
-   layout "main"
+   # layout "main"
   # http_basic_authenticate_with name: "dhh", password: "secret", except: [:index, :show]
 
   def index
@@ -14,7 +14,7 @@ class ArticlesController < ApplicationController
     @article = Article.new
   end
 
-  def create
+  def   create
     # @article = Article.new(title: "...", body: "...")
     @article = Article.new(article_params)
     if @article.save
@@ -26,6 +26,7 @@ class ArticlesController < ApplicationController
 
   def edit
     @article = Article.find(params[:id])
+    # @comment = @article.comments.find(params[:id])
   end
 
   def update

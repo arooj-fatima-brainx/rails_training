@@ -11,3 +11,4 @@ class Article < ApplicationRecord
   # validates_associated :comments
   # Don't use validates_associated on both ends of your associations. They would call each other in an infinite loop.
 end
+

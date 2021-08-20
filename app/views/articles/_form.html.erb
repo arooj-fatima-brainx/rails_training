@@ -1,26 +1,113 @@
-<%= form_with model: article do |form| %>
-    <div>
-      <%= form.label :title %><br>
-      <%= form.text_field :title %>
-      <% article.errors.full_messages_for(:title).each do |message| %>
-        <div><%= message %></div>
-      <% end %>
-    </div>
-  
-    <div>
-      <%= form.label :body %><br>
-      <%= form.text_area :body %><br>
-      <% article.errors.full_messages_for(:body).each do |message| %>
-        <div><%= message %></div>
-      <% end %>
-    </div>
-  
-    <div>
-    <%= form.label :status %><br>
-    <%= form.select :status, ['public', 'private', 'archived'], selected: 'public' %>
-    </div>
 
-    <div>
-      <%= form.submit %>
-    </div>
-  <% end %>
+
+<%#= simple_form_for @article do |f| %>
+  <%#= f.input :title %>
+  <%#= f.input :body %>
+  <%#= f.button :submit %>
+<%# end %>
+
+<%= simple_form_for @article do |f| %>
+  <%= f.input :title, label: 'Title', hint: 'No special characters.', disabled: true, error: 'Title is mandatory, please specify one', placeholder: 'Update title here' %>
+  <%= f.input :body ,placeholder: 'Update body here' %>
+  <%= f.select :status, ['public', 'private', 'archived'], selected: 'public' %>
+  <%= f.button :submit %>
+<% end %>
+
+
+
+<%#= simple_form_for @article do |f| %>
+  <%#= f.input :title, input_html: { class: 'special' } %>
+  <%#= f.input :body, input_html: { maxlength: 20 } %>
+  <%#= f.input :status, input_html: { value: '1' } %>
+  <%#= f.button :submit %>
+<%# end %>
+
+
+
+<%#= simple_form_for @article, defaults: { input_html: { class: 'default_class' } } do |f| %>
+<%# end %>
+
+<%#= simple_form_for @article do |f| %>
+  <%#= f.input :title, wrapper_html: { class: 'username' } %>
+  <%#= f.input :body, wrapper_html: { id: 'password' }, required: false %>
+  <%#= f.button :submit %>
+<%# end %>
+
+<%#= simple_form_for @article do |f| %>
+  <%#= f.label :titleee %>
+  <%#= f.input_field :title %>
+  <%#= f.hint 'No special characters, please!' %>
+  <%#= f.error :username, id: 'user_name_error' %>
+  <%#= f.full_error :token %>
+  <%#= f.submit 'Save' %>
+<%# end %>
+
+
+<!--to strip away all the div wrappers around the <input>-->
+<%#=simple_form_for @article do |f| %>
+<%#=  f.input_field :title %>
+<%#= f.input_field :remember_me, as: :boolean %>
+<%# end %>
+
+
+<%#= simple_form_for @article do |f| %>
+  <%#= f.input :title, label_html: { class: 'my_class' }, hint_html: { class: 'hint_class' } %>
+  <%#= f.input :body, hint: false, error_html: { id: 'password_error' }%>
+  <%#= f.input :status %>
+  <%#= f.select :status, ['public', 'private', 'archived'], selected: 'public' %>
+
+  <%#= f.select :status, Comment.all.map { |r| [r.commenter, r.id, { class: r.article.id }] }, include_blank: true %>
+  <%#= f.collection_radio_buttons :status, [[true, 'Yes'], [false, 'No']], :first, :last %>
+  <%#= f.collection_check_boxes :comment_ids, [['public', 'public'], ['private', 'private'], ['private', 'archived']], :first, :last %>
+  <%#= f.collection_check_boxes :comment_ids, Comment.all, :id  , :commenter%>
+  <%#= f.association :comments %>
+
+  <%#= f.association :comment_ids, as: :check_boxes%>
+  <%#= f.association :comment, collection: Comment.active.order(:commenter), prompt: "Choose a Comment" %>
+<%#= f.association :comments, collection: Comment.order(:comment), prompt: "Choose a Comment" %>
+  <%#= f.button :button %>
+
+  <%#= f.button :submit , "Custom Button Text", class: "my-button"%>
+<%# end %>
+
+<!--Simple Form also lets you overwrite the default input type it creates:-->
+<%#= f.input :description, as: :text %>
+<%#= f.input :accepts,     as: :radio_buttons %>
+<%#= f.input :username, disabled: true, hint: 'You cannot change your username.' %>
+<%#= f.input :accepts, as: :boolean, boolean_style: :inline, checked_value: true, unchecked_value: false %>
+<%#= f.input :updated_at, as: :date, start_year: Date.today.year - 50, end_year: Date.today.year, order: [:day, :month, :year] %> <!--  , discard_day: true,-->
+<%#= f.input :id, collection: 18..60 %>
+<%#= f.input :id, as: :radio_buttons, collection: [['0', 'female'], ['1', 'male']], label_method: :second, value_method: :first %>
+<%#= f.input :password_confirmation, label: false %>
+<%#= f.input :id, collection: 18..60, prompt: "Select your age", selected: 21%>
+<!--f.input :residence_country, priority: [ "Brazil" ]-->
+<!--f.input :time_zone, priority: /US/-->
+<%#= f.button :button, "Custom Button Text" %>
+
+
+<%#= form_with model: article do |form| %>
+<!--    <div>-->
+<!--      <%#= form.label :title %><br>-->
+      <%#= form.text_field :title %>
+      <%# article.errors.full_messages_for(:title).each do |message| %>
+<!--        <div><%#= message %></div>-->
+      <%# end %>
+<!--    </div>-->
+
+<!--    <div>-->
+<!--      <%#= form.label :body %><br>-->
+<!--      <%#= form.text_area :body %><br>-->
+      <%# article.errors.full_messages_for(:body).each do |message| %>
+<!--        <div><%#= message %></div>-->
+      <%# end %>
+<!--    </div>-->
+
+<!--    <div>-->
+<!--    <%#= form.label :status %><br>-->
+    <%#= form.select :status, ['public', 'private', 'archived'], selected: 'public' %>
+<!--    </div>-->
+
+<!--    <div>-->
+      <%#= form.submit %>
+<!--    </div>-->
+  <%# end %>
